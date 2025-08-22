@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://hari-hr-solutions.vercel.app//sitemap.xml
+Sitemap: https://harihrsolutions.me//sitemap.xml
