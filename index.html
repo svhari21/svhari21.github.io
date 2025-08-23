@@ -389,7 +389,7 @@ for the companyIt provides solutions that manage the entire HR services delivary
         <!-- Testimonial End -->
 
 
-        
+       
         <!-- Contact Start -->
         <div id="contact" class="contact">
             <div class="container">
@@ -436,31 +436,98 @@ for the companyIt provides solutions that manage the entire HR services delivary
                         </div>
                     </div>
                     <div class="col-md-7">
-                        <div class="contact-form">
-                            <div id="success"></div>
-                            <form name="sentMessage" id="contactForm" novalidate="novalidate">
-                                <div class="control-group">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name" required="required" data-validation-required-message="Please enter your name" />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email" required="required" data-validation-required-message="Please enter your email" />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <input type="text" class="form-control" id="subject" placeholder="Subject" required="required" data-validation-required-message="Please enter a subject" />
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div class="control-group">
-                                    <textarea class="form-control" id="message" placeholder="Message" required="required" data-validation-required-message="Please enter your message"></textarea>
-                                    <p class="help-block text-danger"></p>
-                                </div>
-                                <div>
-                                    <button class="btn" type="submit" id="sendMessageButton">Send Message</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+  <div class="contact-form">
+    <div id="success"></div>
+    <form 
+      action="https://formspree.io/f/mqalrnvk" 
+      method="POST" 
+      id="contactForm" 
+      novalidate="novalidate"
+    >
+      <div class="control-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          name="name" 
+          placeholder="Your Name" 
+          required="required" 
+          data-validation-required-message="Please enter your name" 
+        />
+        <p class="help-block text-danger"></p>
+      </div>
+
+      <div class="control-group">
+        <input 
+          type="email" 
+          class="form-control" 
+          name="email" 
+          placeholder="Your Email" 
+          required="required" 
+          data-validation-required-message="Please enter your email" 
+        />
+        <p class="help-block text-danger"></p>
+      </div>
+
+      <div class="control-group">
+        <input 
+          type="text" 
+          class="form-control" 
+          name="subject" 
+          placeholder="Subject" 
+          required="required" 
+          data-validation-required-message="Please enter a subject" 
+        />
+        <p class="help-block text-danger"></p>
+      </div>
+
+      <div class="control-group">
+        <textarea 
+          class="form-control" 
+          name="message" 
+          placeholder="Message" 
+          required="required" 
+          data-validation-required-message="Please enter your message"
+        ></textarea>
+        <p class="help-block text-danger"></p>
+      </div>
+
+      <div>
+        <button class="btn" type="submit">Send Message</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript to handle success/error without redirect -->
+<script>
+document.getElementById("contactForm").addEventListener("submit", async function(event) {
+  event.preventDefault(); // stop default redirect (like WhatsApp)
+
+  const form = event.target;
+  const data = new FormData(form);
+
+  try {
+    const response = await fetch(form.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      document.getElementById("success").innerHTML = 
+        '<div class="alert alert-success mt-2">✅ Thank you! Your message has been sent.</div>';
+      form.reset();
+    } else {
+      document.getElementById("success").innerHTML = 
+        '<div class="alert alert-danger mt-2">❌ Oops! Something went wrong. Please try again.</div>';
+    }
+  } catch (error) {
+    document.getElementById("success").innerHTML = 
+      '<div class="alert alert-danger mt-2">⚠️ Network error. Please try again later.</div>';
+  }
+});
+</script>
+
                 </div>
             </div>
         </div>
